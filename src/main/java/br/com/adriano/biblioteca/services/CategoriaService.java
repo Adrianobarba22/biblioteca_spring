@@ -28,6 +28,13 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
 
+    public Categoria update(Integer id, Categoria categoria) {
+        Categoria cat = buscarPorId(id);
+        cat.setNome(categoria.getNome());
+        cat.setDescricao(categoria.getDescricao());
+        return categoriaRepository.save(cat);
+    }
+
     public void delete(Integer id) {
         categoriaRepository.deleteById(id);
     }

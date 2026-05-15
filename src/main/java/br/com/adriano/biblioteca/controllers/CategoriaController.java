@@ -32,6 +32,14 @@ public class CategoriaController {
             return cat;
     }
 
+    @PutMapping("/{id}")
+    public Categoria update(@PathVariable Integer id, @RequestBody Categoria categoria) {
+        Categoria cat = categoriaService.buscarPorId(id);
+        cat.setNome(categoria.getNome());
+        cat.setDescricao(categoria.getDescricao());
+        return categoriaService.save(cat);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         categoriaService.delete(id);
