@@ -1,6 +1,7 @@
 package br.com.adriano.biblioteca.models;
 
 import br.com.adriano.biblioteca.enuns.Edicao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -15,6 +16,7 @@ public class Livro {
    private String texto;
 @Enumerated(EnumType.STRING)
    private Edicao edicao;
+   @JsonIgnore
    @ManyToOne
    @JoinColumn(name = "categoria_id")
    private Categoria categoria;
