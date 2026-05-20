@@ -29,7 +29,7 @@ public class CategoriaController {
     @PostMapping
     public Categoria save(@RequestBody Categoria categoria) {
         Categoria cat = categoriaService.save(categoria);
-            return cat;
+        return cat;
     }
 
     @PutMapping("/{id}")
@@ -38,6 +38,7 @@ public class CategoriaController {
         cat.setNome(categoria.getNome());
         cat.setDescricao(categoria.getDescricao());
         return categoriaService.save(cat);
+
     }
 
     @DeleteMapping("/{id}")
