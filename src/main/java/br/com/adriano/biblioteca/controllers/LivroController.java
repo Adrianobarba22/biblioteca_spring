@@ -27,20 +27,22 @@ public class LivroController {
         return ResponseEntity.ok().body(new LivroDto(livro));
     }
 
+    //localhost:8081/livro?categoria=2
     @GetMapping
     public ResponseEntity<List<LivroDto>> buscarPorCategoria(@RequestParam(value = "categoria", defaultValue = "0") Integer categoriaId) {
-        List<Livro> livros = livroService.buscarPorCategoria(categoriaId);
-        return ResponseEntity.ok().body(livros.stream().map(livro -> new LivroDto(livro)).collect(Collectors.toList()));
+        List<Livro> list = livroService.buscarPorCategoria(categoriaId);
+        return ResponseEntity.ok().body(list.stream().map(LivroDto::new).collect(Collectors.toList()));
     }
-    
+
     @PostMapping
-    public ResponseEntity<LivroDto> salvar(@RequestParam(value = "categoria", defaultValue = "0") Integer categoriaId, @RequestBody LivroDto livroDto) {
+    public ResponseEntity<LivroDto> salvar(@RequestParam(value = "categoria", defaultValue = "0") Integer categoriaId
+            ,@RequestBody LivroDto livroDto) {
         Livro livro = livroService.salvar(categoriaId, livroDto);
         return ResponseEntity.ok().body(modelMapper.map(livro, LivroDto.class));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id){
         livroService.deletar(id);
         return ResponseEntity.noContent().build();
     }
